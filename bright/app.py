@@ -47,8 +47,9 @@ def get_all():
 
 @app.route('/<user_ids>', methods=['GET'])
 def get(user_ids):
-    app.logger.debug("Get user or list of users")
-    users = User.query.filter(User.id.in_(user_ids)).all()
+    app.logger.debug(f"Get user or list of users, {user_ids}")
+    ids = user_ids.split(',')
+    users = User.query.filter(User.id.in_(ids)).all()
     all_users = []
     for user in users:
         new_user = {
@@ -102,7 +103,7 @@ def update():
     for user in data:
         if 'id' in user:
             i = user['id']
-            update_user = User.query.filter_by(id=user_id).first()
+            update_user = User.query.filter_by(id=i).first()
             if update_user is not None:
                 if 'first_name' in user:
                     update_user.first_name = user['first_name']
