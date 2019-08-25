@@ -1,3 +1,5 @@
+# bright.md 
+
 Timebox: 4 hours
 Create a micro-service with the following:
 
@@ -12,22 +14,54 @@ Create a micro-service with the following:
 
 You can use Java, GoLang, or Python for this exercise.
 
+## Requirements
+* Docker
+* Docker-compose
+* pip
+* python 3.7
 
+## Build and Run
 
-export POSTGRES_USER=test && \
-export POSTGRES_PASSWORD=password && \
-export POSTGRES_HOST=localhost && \
-export POSTGRES_PORT=5432 && \
-export POSTGRES_DB=bright && \
-export FLASK_APP=app.py && \
-flask run
+### Postgres container
+```
+$ docker-compose up --build -d
+```
 
+### Virtualenv
+```
+$ cd bright
+$ python3 -m venv venv
+$ source venv/bin/activate
+$ pip install -r requirements.txt
+```
 
-curl -XPOST -H "Content-type: application/json" -d '{"first_name": "Paul", "last_name": "Atreides", "zip_code": "99999", "email": "paul@dune.com"}' '127.0.0.1:5000/create'
-curl -XPOST -H "Content-type: application/json" -d '{"first_name": "Leto", "last_name": "Atreides", "zip_code": "99999", "email": "leto@dune.com"}' '127.0.0.1:5000/create'
+### Start Server
+```
+$ export POSTGRES_USER=test && \
+  export POSTGRES_PASSWORD=password && \
+  export POSTGRES_HOST=localhost && \
+  export POSTGRES_PORT=5432 && \
+  export POSTGRES_DB=bright && \
+  export FLASK_APP=app.py && \
+  flask run
+```
 
-curl '127.0.0.1:5000/'
+## Examples
 
+### Create
+```
+$ curl -XPOST -H "Content-type: application/json" -d '[{"first_name": "Paul", "last_name": "Atreides", "zip_code": "99999", "email": "paul@dune.com"}, {"first_name": "Leto", "last_name": "Atreides", "zip_code": "99999", "email": "leto@dune.com"}]' '127.0.0.1:5000/create'
+```
+### Read
+```
+$ curl '127.0.0.1:5000/'
+```
+### Update
+```
+$ curl -X 'PATCH' -H "Content-type: application/json" -d '{"zip_code": "11111"}' '127.0.0.1:5000/update/2'
+```
+### Delete
+```
 curl -X "DELETE" '127.0.0.1:5000/delete/1'
+```
 
-curl -X 'PATCH' -H "Content-type: application/json" -d '{"zip_code": "11111"}' '127.0.0.1:5000/update/2'
