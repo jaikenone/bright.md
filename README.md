@@ -1,4 +1,4 @@
-# bright.md 
+# bright.md
 
 Timebox: 4 hours
 Create a micro-service with the following:
@@ -49,18 +49,22 @@ $ export POSTGRES_USER=test && \
 ## Examples
 
 ### Create
+Post data is dictionary for new user or a list of dictionary for new users.
 ```
-$ curl -XPOST -H "Content-type: application/json" -d '[{"first_name": "Paul", "last_name": "Atreides", "zip_code": "99999", "email": "paul@dune.com"}, {"first_name": "Leto", "last_name": "Atreides", "zip_code": "99999", "email": "leto@dune.com"}]'  '127.0.0.1:5000/create'
+$ curl -XPOST -H "Content-type: application/json" -d '[{"first_name": "Leto", "last_name": "Atreides", "zip_code": "11111", "email": "leto@caladan.com"}, {"first_name": "Jessica", "last_name": "", "zip_code": "11111", "email": "paul@caladan.com"}, {"first_name": "Paul", "last_name": "Atreides", "zip_code": "11111", "email": "paul@caladan.com"}]'  '127.0.0.1:5000/create'
 ```
 ### Read
+Read all or a list of users (example: /1 or /3,5).
 ```
 $ curl '127.0.0.1:5000/'
 ```
 ### Update
+Update one user or a list of users.
 ```
-$ curl -X 'PATCH' -H "Content-type: application/json" -d '{"zip_code": "11111"}' '127.0.0.1:5000/update/2'
+$ curl -X 'PATCH' -H "Content-type: application/json" -d '[{"id": 1, "zip_code": "11111"},{"id": 2, "zip_code": "11111"}, {"id": 3, "zip_code": "11111"}]' '127.0.0.1:5000/update'
 ```
 ### Delete
+Delete one user or a list users (example: /1 or /3,5).
 ```
 curl -X "DELETE" '127.0.0.1:5000/delete/1'
 ```
