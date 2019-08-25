@@ -50,7 +50,10 @@ $ export POSTGRES_USER=test && \
 
 ### Create
 ```
-$ curl -XPOST -H "Content-type: application/json" -d '[{"first_name": "Paul", "last_name": "Atreides", "zip_code": "99999", "email": "paul@dune.com"}, {"first_name": "Leto", "last_name": "Atreides", "zip_code": "99999", "email": "leto@dune.com"}]' '127.0.0.1:5000/create'
+$ curl -XPOST -H "Content-type: application/json" \
+  -d '[{"first_name": "Paul", "last_name": "Atreides", "zip_code": "99999", "email": "paul@dune.com"}, \
+  {"first_name": "Leto", "last_name": "Atreides", "zip_code": "99999", "email": "leto@dune.com"}]' \
+  '127.0.0.1:5000/create'
 ```
 ### Read
 ```
