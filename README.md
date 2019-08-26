@@ -66,6 +66,11 @@ $ curl -X 'PATCH' -H "Content-type: application/json" -d '[{"id": 1, "zip_code":
 ### Delete
 Delete one user or a list users (example: /1 or /3,5).
 ```
-curl -X "DELETE" '127.0.0.1:5000/user/delete/1'
+$ curl -X "DELETE" '127.0.0.1:5000/user/delete/1'
 ```
 
+## Test
+Run all test.
+```
+$ py.test
+```

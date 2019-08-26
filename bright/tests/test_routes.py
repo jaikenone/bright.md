@@ -1,7 +1,7 @@
 from flask import Flask
 import json
 
-from flask_pytest_example.handlers.routes import configure_routes
+from bright.routes import configure_routes
 
 
 def test_base_route():
@@ -11,5 +11,20 @@ def test_base_route():
     url = '/'
 
     response = client.get(url)
-    assert response.get_data() == b'Hello, World!'
+    assert response.get_data() == b'Hello, world!'
     assert response.status_code == 200
+
+def test_post_route__failure__bad_request():
+    app = Flask(__name__)
+    configure_routes(app)
+    client = app.test_client()
+    url = '/nothing'
+
+    mock_request_headers = {
+        'authorization-sha256': '123'
+    }
+
+    mock_request_data = {}
+
+    response = client.post(url, data=json.dumps(mock_request_data), headers=mock_request_headers)
+    assert response.status_code == 404
