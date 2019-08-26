@@ -25,11 +25,19 @@ def after_request(response):
 def exceptions(e):
     tb = traceback.format_exc()
     timestamp = time.strftime('[%Y-%b-%d %H:%M]')
-    app.logger.error('%s %s %s %s %s 5xx INTERNAL SERVER ERROR\n%s', timestamp, request.remote_addr, request.method, request.scheme, request.full_path, tb)
+    app.logger.error(
+        '%s %s %s %s %s 5xx INTERNAL SERVER ERROR\n%s',
+        timestamp, request.remote_addr, request.method, request.scheme, request.full_path, tb
+    )
     return e
 
-@app.route('/', methods=['GET'])
-def get_all():
+
+@app.rout('/', methods=['GET'])
+def get():
+    return "Hello, world!", 200
+
+@app.route('/user/', methods=['GET'])
+def user_get_all():
     app.logger.debug("Get all users")
     users = User.query.all()
     all_users = []
@@ -45,8 +53,8 @@ def get_all():
         all_users.append(new_user)
     return json.dumps(all_users), 200
 
-@app.route('/<user_ids>', methods=['GET'])
-def get(user_ids):
+@app.route('/user/<user_ids>', methods=['GET'])
+def user_get(user_ids):
     app.logger.debug(f"Get user or list of users, {user_ids}")
     ids = user_ids.split(',')
     users = User.query.filter(User.id.in_(ids)).all()
@@ -62,8 +70,8 @@ def get(user_ids):
         all_users.append(new_user)
     return json.dumps(all_users), 200
 
-@app.route('/create', methods=['POST'])
-def create():
+@app.route('/user/create', methods=['POST'])
+def user_create():
     app.logger.debug("Create user or list of users")
     data = request.get_json()
     if type(data) == dict:
@@ -85,8 +93,8 @@ def create():
     db.session.commit()
     return "Created", 200
 
-@app.route('/delete/<user_ids>', methods=['DELETE'])
-def delete(user_ids):
+@app.route('/user/delete/<user_ids>', methods=['DELETE'])
+def user_delete(user_ids):
     app.logger.debug("Delete user or list of users")
     ids = user_ids.split(',')
     for i in ids:
@@ -94,8 +102,8 @@ def delete(user_ids):
     db.session.commit()
     return "Deleted", 200
 
-@app.route('/update', methods=['PATCH'])
-def update():
+@app.route('/user/update', methods=['PATCH'])
+def user_update():
     app.logger.debug("Update user or list of users")
     data = request.get_json()
     if type(data) == dict:

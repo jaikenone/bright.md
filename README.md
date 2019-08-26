@@ -51,21 +51,21 @@ $ export POSTGRES_USER=test && \
 ### Create
 Post data is dictionary for new user or a list of dictionary for new users.
 ```
-$ curl -XPOST -H "Content-type: application/json" -d '[{"first_name": "Leto", "last_name": "Atreides", "zip_code": "11111", "email": "leto@caladan.com"}, {"first_name": "Jessica", "last_name": "", "zip_code": "11111", "email": "paul@caladan.com"}, {"first_name": "Paul", "last_name": "Atreides", "zip_code": "11111", "email": "paul@caladan.com"}]'  '127.0.0.1:5000/create'
+$ curl -XPOST -H "Content-type: application/json" -d '[{"first_name": "Leto", "last_name": "Atreides", "zip_code": "11111", "email": "leto@caladan.com"}, {"first_name": "Jessica", "last_name": "", "zip_code": "11111", "email": "paul@caladan.com"}, {"first_name": "Paul", "last_name": "Atreides", "zip_code": "11111", "email": "paul@caladan.com"}]'  '127.0.0.1:5000/user/create'
 ```
 ### Read
 Read all or a list of users (example: /1 or /3,5).
 ```
-$ curl '127.0.0.1:5000/'
+$ curl '127.0.0.1:5000/user'
 ```
 ### Update
 Update one user or a list of users.
 ```
-$ curl -X 'PATCH' -H "Content-type: application/json" -d '[{"id": 1, "zip_code": "11111"},{"id": 2, "zip_code": "11111"}, {"id": 3, "zip_code": "11111"}]' '127.0.0.1:5000/update'
+$ curl -X 'PATCH' -H "Content-type: application/json" -d '[{"id": 1, "zip_code": "11111"},{"id": 2, "zip_code": "11111"}, {"id": 3, "zip_code": "11111"}]' '127.0.0.1:5000/user/update'
 ```
 ### Delete
 Delete one user or a list users (example: /1 or /3,5).
 ```
-curl -X "DELETE" '127.0.0.1:5000/delete/1'
+curl -X "DELETE" '127.0.0.1:5000/user/delete/1'
 ```
 
