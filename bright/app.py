@@ -32,11 +32,11 @@ def exceptions(e):
     return e
 
 
-@app.rout('/', methods=['GET'])
+@app.route('/', methods=['GET'])
 def get():
     return "Hello, world!", 200
 
-@app.route('/user/', methods=['GET'])
+@app.route('/user', methods=['GET'])
 def user_get_all():
     app.logger.debug("Get all users")
     users = User.query.all()
