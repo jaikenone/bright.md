@@ -74,10 +74,37 @@ Run all test.
 ```
 $ py.test
 ```
+Sample results
+```
+============================================ test session starts =============================================
+platform darwin -- Python 3.7.3, pytest-5.1.1, py-1.8.0, pluggy-0.12.0
+rootdir: /Users/pwong/ownCloud/Code/bright.md/bright
+collected 7 items
+
+tests/test_routes.py .......                                                                           [100%]
+
+============================================= 7 passed in 5.13s ==============================================
+```
+
 ## Coverage
 Test test coverage.
 ```
 $ coverage run --source bright -m pytest
 $ coverage report
+```
+Sample results
+```
+Name                   Stmts   Miss  Cover
+------------------------------------------
+__init__.py               22      0   100%
+app.py                    21     21     0%
+config.py                  7      0   100%
+models.py                  9      0   100%
+routes.py                 64     11    83%
+tests/__init__.py          0      0   100%
+tests/conftest.py         23      0   100%
+tests/test_routes.py      43      0   100%
+------------------------------------------
+TOTAL                    189     32    83%
 ```
 
