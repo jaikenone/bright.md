@@ -5,4 +5,3 @@ coverage
 pytest
 testing.postgresql
 flask_migrate
-unittest
