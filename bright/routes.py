@@ -1,7 +1,7 @@
 from flask import request
 import json
 
-from .models import User
+from .models import User, db
 
 
 def configure_routes(app):

@@ -74,3 +74,10 @@ Run all test.
 ```
 $ py.test
 ```
+## Coverage
+Test test coverage.
+```
+$ coverage run --source bright -m pytest
+$ coverage report
+```
+
